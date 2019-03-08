@@ -1,0 +1,67 @@
+/**
+ * @author ageorg08
+ *
+ * Program solves an N puzzle using 3 different methods.
+ *
+ * The puzzle is read from a txt file.
+ *
+ * The program takes as arguments one of the methods for the solve method, the input file
+ * name and the output file name in which the solution will be stored.
+ *
+ * After correctly initialising the puzzle the program will proceed to solve
+ * the puzzle based on method chosen.
+ *
+ * Methods {Breadth first search, Best first search, A*}
+ *
+ * All the algorithms were generalised to use 2 data structures.
+ * Open and closed.
+ *
+ * In Open goes the Nodes in which we have seen but not yet explored.
+ * In Closed goes the Nodes in which we already explored.
+ *
+ * To explore means to compute the children of a Node and check if those are not already explored
+ * and place them in Open. 
+ *
+ * Breadth first search:
+ *      Open = Queue
+ *      Closed = SuffixTree
+ *
+ * Discovers Nodes level by level of the tree. Level in this context
+ * means number of moves so this means if this search stumbles upon the
+ * solution, the path to this solution is the shortest path. For solutions
+ * that are in depth of 35+ this method is really slow because it grows
+ * exponentially and shouldn't be used in any case.
+ *
+ * Best first search:
+ *      Open = PriorityQueue(min heap)
+ *      Closed = SuffixTree
+ *
+ * Discovers Nodes by choosing the next Node to explore based on the
+ * smallest heuristic value. This method is greedy and arrives to a solution
+ * fast but usually the solution found is not the shortest path.
+ *
+ * A-star:
+ *      Open = PriorityQueue(min heap)
+ *      Closed = SuffixTree
+ *
+ * Discovers Nodes by choosing the next Node to explore based on both the
+ * heuristic and the moves that it took to get to current state. This method
+ * is guaranteed to find the shortest path and is much faster than breadth
+ * first search since it is informed.
+ *
+ * The heuristic used is manhattan distance.
+ *
+ * SuffixTree is used to check in Ο(k) if a given Node was already explored
+ * where k is the sum of all digits as chars in the grid. This decreases the running
+ * time drastically compared to having a list since we have close to constant time for each check.
+ *
+ * Method signatures: breadth, best, a-star
+ *
+ * To compile: $ make
+ * To run:     $ ./as3 (method) (inputfile) (outputfile)
+ * Example:    $ ./as3 a-star test3x3_1.txt solution.txt
+ *
+ * For 4x4 puzzles you might need alot of RAM allocated to the program(some IDEs might crash the program
+ * to prevent memory reaching 100%).
+ *
+ */
